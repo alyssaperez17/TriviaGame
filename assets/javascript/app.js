@@ -46,6 +46,7 @@ var game = {
         document.getElementById('play').style.display = 'none';
 
         timer = setInterval(game.countdown, 1000);
+        console.log("start", timer)
 
         $('#subwrapper').prepend('<h2>Time Remaining: <span id="counter-number">45</span> Seconds</h2>');
         $('#start').remove();
@@ -104,6 +105,7 @@ var game = {
     result: function() {
 
         clearInterval(timer);
+        console.log("result", timer)
          document.getElementById('play').style.display = 'block';
 
         $('#subwrapper h2').remove();
