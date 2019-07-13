@@ -1,6 +1,6 @@
 var questionsAnswers = [{
     question: "Who played the lead in 16 Candles?",
-    choices: ["Debra Winger", "Michelle Pfeiffer", "Molly Ringwald", "Meg Ryan,"],
+    choices: ["Debra Winger", "Michelle Pfeiffer", "Molly Ringwald", "Meg Ryan"],
     correctAnswer: "Molly Ringwald"
 }, {
     question: "What was Rizzo's first name in Grease?",
@@ -15,7 +15,7 @@ var questionsAnswers = [{
     choices: ["2019", "1999", "2029", "3029"],
     correctAnswer: "2029"
 }, {
-    question: "What was Sams dogs name on The Lost Boys?",
+    question: "What was Sam's dog's name on The Lost Boys?",
     choices: ["Rocky", "Nanook", "Max", "Charlie"],
     correctAnswer: "Nanook"
 }];
@@ -29,10 +29,27 @@ $(document).on('click', '#done', function () {
     game.done();
 });
 
+$(document).on('click', '#replay', function () {
+    game.reset();
+    console.log("worked")
+
+ 
+})
+
+
+
 var game = {
     correct: 0,
     incorrect: 0,
     counter: 45,
+    reset: function (){
+        console.log("reset")
+    game.correct = 0;
+    game.incorrect = 0;
+    game.counter = 45;
+    game.start();
+
+    },
     countdown: function () {
         game.counter--;
         $('#counter-number').html(game.counter);
@@ -57,9 +74,9 @@ var game = {
                 panel.append('<p><input type="checkbox" name="question' + '-' + i + '" value="' + questionsAnswers[i].choices[j] + '">' + "     " +questionsAnswers[i].choices[j] + "</p>");
             }
         }
-
         panel.append('<button class="btn-primary" id="done">Done</button>');
     },
+        
 
     done: function() {
 
@@ -98,6 +115,8 @@ var game = {
             } else {
                 game.incorrect++;
             }
+
+        
         });
         this.result();
     },
@@ -110,9 +129,12 @@ var game = {
 
         $('#subwrapper h2').remove();
         panel.html('<h2>Times Up!</h2>');
+        panel.append('<button class="btn-primary" id="replay">Play again </button>')
         panel.append('<h3>Correct Answers: ' + this.correct + '</h3>');
         panel.append('<h3>Incorrect Answers: ' + this.incorrect + '</h3>');
         panel.append('<h3>Unanswered: ' + (questionsAnswers.length - (this.incorrect + this.correct)) + '</h3>');
+        
     }
 
 };
+
